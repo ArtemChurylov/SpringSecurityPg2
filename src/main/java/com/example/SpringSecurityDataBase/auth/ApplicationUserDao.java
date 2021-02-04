@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface ApplicationUserDao {
 
-    void save(ApplicationUser applicationUser);
+    void save(CrmUser crmUser);
 
     Optional<ApplicationUser> selectApplicationUserByUsername(String username);
 

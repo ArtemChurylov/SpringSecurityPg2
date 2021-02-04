@@ -13,7 +13,7 @@ public class ApplicationUserService implements UserDetailsService {
     private final ApplicationUserDao applicationUserDao;
 
     @Autowired
-    public ApplicationUserService(@Qualifier("fake") ApplicationUserDao applicationUserDao) {
+    public ApplicationUserService(ApplicationUserDao applicationUserDao) {
         this.applicationUserDao = applicationUserDao;
     }
 
@@ -25,4 +25,5 @@ public class ApplicationUserService implements UserDetailsService {
                         new UsernameNotFoundException(String.format("Username %s not found", username))
                 );
     }
+
 }

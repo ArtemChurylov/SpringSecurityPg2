@@ -7,13 +7,15 @@ import com.example.SpringSecurityDataBase.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-@Repository("fake")
+@Service
 public class ApplicationUserDaoService implements ApplicationUserDao {
 
     @Autowired
@@ -34,8 +36,10 @@ public class ApplicationUserDaoService implements ApplicationUserDao {
     }
 
     @Override
-    public void save(ApplicationUser applicationUser) {
-        applicationUser.setPassword(passwordEncoder.encode(applicationUser.getPassword()));
+    public void save(CrmUser user) {
+        ApplicationUser applicationUser = new ApplicationUser();
+        applicationUser.setUsername(user.getUsername());
+        applicationUser.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<Roles> roles = new HashSet<>();
         roles.add(roleRepository.getOne(1L));
         applicationUser.setRoles(roles);
@@ -44,15 +48,10 @@ public class ApplicationUserDaoService implements ApplicationUserDao {
 
     @Override
     public Optional<ApplicationUser> selectApplicationUserByUsername(String username) {
-        return getApplicationUsers()
+        return userRepository.findAll()
                 .stream()
                 .filter(applicationUser -> username.equals(applicationUser.getUsername()))
                 .findFirst();
-    }
-
-    private List<ApplicationUser> getApplicationUsers() {
-        List<ApplicationUser> applicationUsers = userRepository.findAll();
-        return applicationUsers;
     }
 
 }

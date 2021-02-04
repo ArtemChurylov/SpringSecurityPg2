@@ -5,15 +5,20 @@
     <title>Registration</title>
 </head>
 <body>
-<form th:action="@{/registration}" th:object="${user}" method="post">
+<form th:action="@{/registration}" th:object="${crmUser}" method="post">
 
-    User name: <input type="text" name="username">
-<!--    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>-->
+    User name: <input type="text" th:field="*{username}">
+    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
 
     <br><br>
 
-    User password: <input type="password" name="password">
-<!--    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>-->
+    User password: <input type="password" th:field="*{password}">
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
+    <br><br>
+
+    Confirm password: <input type="password" th:field="*{confirmPassword}">
+    <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
 
     <br><br>
 

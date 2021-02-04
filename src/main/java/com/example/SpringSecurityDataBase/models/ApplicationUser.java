@@ -18,6 +18,7 @@ public class ApplicationUser implements UserDetails {
 
     @Column(name = "username")
     private String username;
+
     @Column(name = "password")
     private String password;
 
@@ -27,11 +28,6 @@ public class ApplicationUser implements UserDetails {
     private Set<Roles> roles;
 
     public ApplicationUser() {
-    }
-
-    public ApplicationUser(String username, String password) {
-        this.username = username;
-        this.password = password;
     }
 
     @Override
@@ -99,4 +95,5 @@ public class ApplicationUser implements UserDetails {
     public void setRoles(Set<Roles> roles) {
         this.roles = roles;
     }
+
 }
